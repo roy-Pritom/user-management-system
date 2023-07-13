@@ -1,12 +1,39 @@
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 const AddUser = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+    const { register, handleSubmit } = useForm();
+    const onSubmit = data =>{
+     fetch('http://localhost:3000/postUser',{
+        method:'POST',
+        headers:{
+            'content-type':'application/json'
+        },
+        body:JSON.stringify(data)
+
+     })
+     .then(res=>res.json())
+     .then(info=>{
+        if(info.insertedId)
+        {
+
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'user added successfully',
+              showConfirmButton: false,
+              timer: 1500
+            })
+        }
+     })
+
+    };
     return (
-        <div>
-            <div className="hero min-h-screen bg-base-200">
-                <div className="hero-content">
+     <div className="bg-base-200">
+          <div className="">
+        <h2 className="pt-8 text-center md:text-4xl text-2xl font-bold">Add User</h2>
+        <div className="hero ">
+                <div className="hero-content my-10">
 
                     <div className="card flex-shrink-0 w-full  shadow-2xl bg-base-100">
                         <form className="card-body" onSubmit={handleSubmit(onSubmit)} >
@@ -45,21 +72,22 @@ const AddUser = () => {
                                     <label className="label">
                                         <span className="label-text">Date</span>
                                     </label>
-                                    <input type="number" placeholder="Date"  {...register("phoneNumber")} className="input input-bordered" />
+                                    <input type="date" placeholder="Date"  {...register("date")} className="input input-bordered" />
                                 </div>
                             </div>
 
 
 
                             <div className="form-control mt-6">
-                                <button className="btn btn-primary">Login</button>
+                                <button type="submit" className="btn btn-secondary">Add User</button>
                             </div>
                         </form>
 
                     </div>
                 </div>
             </div>
-        </div>
+       </div>
+     </div>
     );
 };
 
