@@ -15,7 +15,7 @@ import AddUser from "../pages/AddUser/AddUser";
             element:<Home></Home>
         },
         {
-           path:'/addUser',
+           path:'/addUser/:id',
            element:<AddUser></AddUser>
         }
       ]
