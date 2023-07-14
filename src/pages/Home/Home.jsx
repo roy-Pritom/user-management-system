@@ -2,9 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { FaRegEye, FaUserEdit, FaRegTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
+import useTitle from "../../hook/useTitle";
 
 const Home = () => {
-
+    useTitle('Home')
     // tanStack query 
     const { data: users = [] } = useQuery(['users'], async () => {
         const res = await fetch('http://localhost:3000/users')
@@ -101,7 +102,7 @@ const Home = () => {
                                     <td>{user?._id}</td>
                                     <td>{user?.firstName} {user?.lastName}</td>
                                     <td>
-                                        <Link>
+                                        <Link to={`/viewUser/${user._id}`}>
                                             <button className="btn btn-secondary btn-sm ">
                                                 View
                                                 <FaRegEye />
@@ -119,12 +120,12 @@ const Home = () => {
                                     </td>
 
                                     <td>
-                                    
-                                            <button onClick={() => handleDelete(user._id)} className="btn btn-ghost bg-red-600  text-white">
-                                                {/* Delete */}
-                                                <FaRegTrashAlt />
-                                            </button>
-                                    
+
+                                        <button onClick={() => handleDelete(user._id)} className="btn btn-ghost bg-red-600  text-white">
+                                            {/* Delete */}
+                                            <FaRegTrashAlt />
+                                        </button>
+
                                     </td>
 
 

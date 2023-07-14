@@ -2,24 +2,25 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
     const navLinks=<>
-            <li className="text-red-600">
+            <li className="">
 
             <Link to='/'>Home</Link>    
             </li>
-            <li className="text-red-600">
+            <li className="">
 
-            <Link to='/'>Home</Link>    
+            <Link to={`/addUser/${'postId'}`}>Add User</Link>    
             </li>
-            <li className="text-red-600">
+            <li className="">
 
-            <Link to='/'>Home</Link>    
+            <Link to='/about'>About Us</Link>    
             </li>
+           
           
     </>
     return (
         <div>
             
-            <div className="navbar bg-base-100">
+            <div className="navbar bg-purple-300">
   <div className="navbar-start">
     <div className="dropdown">
       <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -30,7 +31,12 @@ const Header = () => {
 
       </ul>
     </div>
-    <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+    <div className="flex justify-center items-center ">
+
+    <img src="https://png.pngtree.com/png-vector/20190712/ourmid/pngtree-user-management-icon-trendy-style-isolated-background-png-image_1542180.jpg"
+     className="w-12 h-12 rounded-full" alt="" />
+    <a className="btn btn-ghost normal-case font-bold text-2xl">userManagement</a>
+    </div>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
@@ -38,7 +44,7 @@ const Header = () => {
     </ul>
   </div>
   <div className="navbar-end">
-    <a className="btn">Button</a>
+    <a className="btn btn-secondary">Login</a>
   </div>
 </div>
 

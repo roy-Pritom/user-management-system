@@ -4,6 +4,8 @@ import {
 import Main from "../Layout/Main";
 import Home from "../pages/Home/Home";
 import AddUser from "../pages/AddUser/AddUser";
+import ViewUser from "../pages/ViewUser/ViewUser";
+import AboutPage from "../pages/AboutPage/AboutPage";
 
   const router = createBrowserRouter([
     {
@@ -17,6 +19,14 @@ import AddUser from "../pages/AddUser/AddUser";
         {
            path:'/addUser/:id',
            element:<AddUser></AddUser>
+        },
+        {
+            path:'/viewUser/:id',
+            element:<ViewUser></ViewUser>
+        },
+        {
+            path:'/about',
+            element:<AboutPage></AboutPage>
         }
       ]
     },
