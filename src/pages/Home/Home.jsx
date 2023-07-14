@@ -8,7 +8,7 @@ const Home = () => {
     useTitle('Home')
     // tanStack query 
     const { data: users = [], refetch } = useQuery(['users'], async () => {
-        const res = await fetch('http://localhost:3000/users')
+        const res = await fetch('https://user-management-server-vert.vercel.app/users')
         return res.json()
     })
 
@@ -30,7 +30,7 @@ const Home = () => {
 
             if (result.isConfirmed) {
 
-                fetch(`http://localhost:3000/users/${id}`, {
+                fetch(`https://user-management-server-vert.vercel.app/users/${id}`, {
                     method: "DELETE"
 
                 })

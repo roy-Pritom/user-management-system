@@ -7,7 +7,7 @@ const ViewUser = () => {
     useTitle('ViewUser')
     const { id } = useParams();
     const { data: user } = useQuery(['users', id], async () => {
-        const res = await fetch(`http://localhost:3000/users/${id}`)
+        const res = await fetch(`https://user-management-server-vert.vercel.app/users/${id}`)
         return res.json()
     })
     console.log(user);
