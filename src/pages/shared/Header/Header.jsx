@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import { FaUserCog } from "react-icons/fa";
 const Header = () => {
     const navLinks=<>
             <li className="">
@@ -34,8 +34,8 @@ const Header = () => {
     <div className="flex justify-center items-center ">
 
     <img src="https://png.pngtree.com/png-vector/20190712/ourmid/pngtree-user-management-icon-trendy-style-isolated-background-png-image_1542180.jpg"
-     className="w-12 h-12 rounded-full" alt="" />
-    <a className="btn btn-ghost normal-case font-bold text-2xl">userManagement</a>
+     className="md:w-12 md:h-12 w-8 h-8 md:ml-0 ml-3 rounded-full" alt="" />
+    <a className="btn btn-ghost normal-case font-bold text-xl">userManagement</a>
     </div>
   </div>
   <div className="navbar-center hidden lg:flex">
@@ -44,7 +44,7 @@ const Header = () => {
     </ul>
   </div>
   <div className="navbar-end">
-    <a className="btn btn-secondary">Login</a>
+    <a className="btn btn-secondary "><FaUserCog className="md:w-10 md:h-10"/></a>
   </div>
 </div>
 

@@ -7,7 +7,7 @@ import useTitle from "../../hook/useTitle";
 const Home = () => {
     useTitle('Home')
     // tanStack query 
-    const { data: users = [] } = useQuery(['users'], async () => {
+    const { data: users = [], refetch } = useQuery(['users'], async () => {
         const res = await fetch('http://localhost:3000/users')
         return res.json()
     })
@@ -17,45 +17,52 @@ const Home = () => {
 
 
     const handleDelete = (id) => {
-        console.log(id);
-        fetch(`http://localhost:3000/users/${id}`, {
-            method: "DELETE"
 
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
 
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
-                }).then((result) => {
-                    if (data.deletedCount > 0) {
-                        if (result.isConfirmed) {
+            if (result.isConfirmed) {
+
+                fetch(`http://localhost:3000/users/${id}`, {
+                    method: "DELETE"
+
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+
+
+                        if (data.deletedCount > 0) {
+                            refetch();
                             Swal.fire(
                                 'Deleted!',
                                 'Your file has been deleted.',
                                 'success'
                             )
                         }
-                    }
-                })
 
 
+                    })
 
-            })
+            }
+
+        })
+
+
 
     }
 
     return (
-        <div className="max-w-screen-xl mx-auto mb-20">
-            <h1 className="text-5xl font-bold mt-10 text-center">User Management System</h1>
-            <h1 className="text-5xl font-bold my-10">All Users</h1>
+        <div className="max-w-screen-xl mx-auto mb-20 md:px-0 px-3">
+            <h1 className="md:text-5xl text-2xl font-bold mt-10 text-center">User Management System</h1>
+            <h1 className="md:text-5xl font-bold my-10 text-2xl">All Users</h1>
             <Link to={`/addUser/${'postId'}`}>
                 <button className="btn btn-secondary btn-sm mb-5">Add User</button>
             </Link>
@@ -92,7 +99,7 @@ const Home = () => {
                                     <td>
 
                                         <div className="avatar">
-                                            <div className="mask mask-squircle w-12 h-12">
+                                            <div className="mask mask-squircle w-16 h-16">
                                                 <img src={user?.userPhoto} alt="Avatar Tailwind CSS Component" />
                                             </div>
                                         </div>
@@ -103,7 +110,7 @@ const Home = () => {
                                     <td>{user?.firstName} {user?.lastName}</td>
                                     <td>
                                         <Link to={`/viewUser/${user._id}`}>
-                                            <button className="btn btn-secondary btn-sm ">
+                                            <button className="btn btn-secondary md:btn-sm ">
                                                 View
                                                 <FaRegEye />
                                             </button>
@@ -112,7 +119,7 @@ const Home = () => {
 
                                     <td>
                                         <Link to={`/addUser/${user._id}`}>
-                                            <button className="btn btn-secondary btn-sm">
+                                            <button className="btn btn-secondary md:btn-sm">
                                                 Edit
                                                 <FaUserEdit />
                                             </button>
